@@ -17,7 +17,7 @@ Including another URLconf
 from shop.settings import MEDIA_ROOT, MEDIA_URL
 from django import urls
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from mainapp import views as mainapp_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -32,6 +32,7 @@ urlpatterns = [
     path('baskets/', include('basketapp.urls', namespace='baskets')),
     path('admin-staff/', include('adminapp.urls', namespace='admin_staff')),
     path('', include('social_django.urls', namespace='social')),
+    path('order/', include('ordersapp.urls', namespace='order')),
 
 ]
 # Подгружаем файлы изображений, т.е. указываем путь откуда подгружать

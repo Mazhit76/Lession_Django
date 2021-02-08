@@ -34,9 +34,11 @@ class UserProfile(models.Model):
         (MALE, 'М'),
         (FEMALE, 'Ж'),
     )
-    # Это сделано для тоо чтобы потом можно было к переменной обращаться через .MALE или .FEMALE
+    # Это сделано для того чтобы потом можно было к переменной обращаться через .MALE или .FEMALE
+    # это ccылка на UserProfile в виде userprofile, через OneToOneField и его сохраняем
 
     user = models.OneToOneField(User, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
+
     # записи -уникальны,   нулевые значения-нет,  для поля создать индекс, при удаление все связанные записи удалить
     tagline = models.CharField(verbose_name='теги', max_length=128, blank=True)
     # сокр имя в единств числе, мас длина 128, могут быть пустые поля
@@ -62,4 +64,4 @@ class UserProfile(models.Model):
         # Здесь мы получили объект который был сохранен ранее,
 
 
-        # это ccылка на UserProfile в виде userprofile, через OneToOneField и его сохраняем
+

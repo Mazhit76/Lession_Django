@@ -5,3 +5,6 @@ db.sqlite3
 !/css/img/
 /media/*
 .vscode/*
+.ssh/
+vk.json
+yandex.json

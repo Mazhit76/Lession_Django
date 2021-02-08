@@ -6,7 +6,7 @@
   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-sc
-    <meta name="description" content="Одежда и товары для людей">
+    <meta name="description content="Одежда и товары для людей">
     <meta name="author" content="">
     <title>
         {% block title %}
@@ -22,8 +22,11 @@
     <!-- Custom styles for this template -->
 
     <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    
+
     {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/font-awesome.css' %}">
     {% endblock css %}
 
 
@@ -60,6 +63,9 @@
                        <li class="nav-item">
                            <a class="nav-link" href="{% url 'authapp:logout' %}">Выйти <i class="fas fa-sign-in-alt"></i></a>
                        </li>
+                       <li>
+                           <a class="nav-link "href="{% url 'ordersapp:orders' %}">Заказы </a>
+                       </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{%url 'authapp:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
@@ -67,6 +73,8 @@
                     {% endif %}
                 </ul>
             </div>
+<!--            Создаем поле заказы-->
+
         </div>
     </nav>    
 
@@ -91,6 +99,7 @@
 
     <!-- Basket script -->
     <script src="{% static 'js/basket.js' %}"></script>
+    </div>
 </body>
 
 

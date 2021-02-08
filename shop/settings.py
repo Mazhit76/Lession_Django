@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'authapp',
     'basketapp',
     'adminapp',
-    'social_django'
+    'social_django',
+    'ordersapp'
 
 ]
 
@@ -200,7 +201,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['127.0.0.1']
