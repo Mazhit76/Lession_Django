@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IG1hc3RlcjI=?=
+From: webmaster@localhost
+To: master2@master2.ru
+Date: Tue, 26 Jan 2021 16:35:46 -0000
+Message-ID: <161167894613.4844.1138265827439180230@srv>
+
+Для подтверждения учетной записи master2 на портале http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/authapp/verify/master2@master2.ru/225664a54290dbe270188fdcb94b5ece0d4fbe69
+-------------------------------------------------------------------------------

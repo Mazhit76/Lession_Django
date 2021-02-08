@@ -1,5 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
+from django.shortcuts import render
 from mainapp.models import ProductCategory, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 

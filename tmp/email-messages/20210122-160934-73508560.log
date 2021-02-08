@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0J/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9C10YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IFB1cGtpbjEz?=
+From: django@geekshop.local
+To: Pupkin13@mail.ru
+Date: Fri, 22 Jan 2021 13:09:34 -0000
+Message-ID: <161132097451.4404.14179105455291252782@PRIMARY>
+
+Для подтверждения учетной записи Pupkin13 на портале http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/authapp/verify/Pupkin13@mail.ru/221895091fa5629740249db2717f37a2686e1e3c
+-------------------------------------------------------------------------------

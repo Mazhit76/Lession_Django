@@ -57,10 +57,15 @@ def basket_edit(request, id, quantity):
             basket.save()
         else:
             basket.delete()
-        baskets = Basket.objects.filter(user=request.user)
-        context = {
-            'baskets': baskets,
-        }
+        # Здесь мы удалили после того как поставили контестный процессор in mainapp
+        #  Вроде как работает. Авторизовался и выбрал 2 покупки они в корзине
+        #  Хотя до конца не понял как работает, то есть в каждом обработчике этот метод присутствует в любом случае
+        #  Это очень опасно засорением и задержками
+        # baskets = Basket.objects.filter(user=request.user)
+        # context = {
+        #     'baskets': baskets,
+        # }
+
 
         result = render_to_string('basketapp/basket.html', context)
         return JsonResponse({'result': result})
