@@ -1,7 +1,7 @@
+import hashlib, random
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from authapp.models import User
 from django import forms
-
+from authapp.models import User
 
 class UserLoginForm(AuthenticationForm):
     class Meta:
@@ -34,6 +34,26 @@ class UserRegisterForm(UserCreationForm):
             field.widget.attrs['class'] = 'form-control py-4'
             field.help_text = ''
 
+    def save(self):
+
+        user = super(UserRegisterForm, self).save()
+        # переоперделяем создаваемого пользователя и сохраняем его
+        user.is_active = True
+
+        # пользователь активный
+        salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+        # Создаем соль
+        user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+        # Создаем ключи +солим
+        user.save()
+        # Сохраняем пользователя и возвращаем пользователя
+        return user
+
+    def clean_age(self):
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError('Вы слишком молоды')
+        return data
 
 class UserProfileForm(UserChangeForm):
     avatar = forms.ImageField(widget=forms.FileInput())

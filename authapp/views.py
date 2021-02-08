@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.forms import UsernameField
+from django.core.mail import send_mail
 from django.http.response import HttpResponseRedirect
 from authapp.forms import UserLoginForm, UserRegisterForm
 from django.shortcuts import render, HttpResponseRedirect
@@ -26,6 +28,8 @@ def login(request):
         # этот метод берет данные из б.д. пользователей и проверяет на
         # совпадение и на его активность
             if user and user.is_active:
+                # Здесь нужно будет раобраться потомучто при создании пользователя в формах проводилась проврека на
+                # выставление авторизация-нет. Из-за этого выходила ошибка. Сейчас стоит истина и работает.
                 auth.login(request, user)  # Производлим авторизацию
             # отправляем главную страницу
                 return HttpResponseRedirect(reverse('main'))
@@ -54,13 +58,23 @@ def profile(request):
 
 
 def register(request):
+    title = 'Регистрация'
+
     # Выдавал ошибку проверку взял с файла уроку 4
     if request.method == 'POST':
         # Создаем новую форму и передаем ей данные из запроса
-        form = UserRegisterForm(data=request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():  # Здесь мы проверяем методам джанго правильность ввода логина и имени
-            form.save()
-            # Если все ок то сохраняем форму
+            user = form.save()
+
+            #Add let user1
+            if send_verify_email(user):
+                print('Сообщение подтверждения отправленно!')
+                return HttpResponseRedirect(reverse('authapp:login'))
+            else:
+                print('Ошибка отправки сообщения!')
+                return HttpResponseRedirect(reverse('authapp:login'))
+                #Если все ок то сохраняем форму
             messages.success(request, 'Вы успешно зарегистрировались!')
             new_user = auth.authenticate(
                 username=form.cleaned_data['username'], password=form.cleaned_data['password2'])
@@ -73,7 +87,7 @@ def register(request):
 
     context = {
         'form': form,
-        'baskets': Basket.objects.filter(user=request.user)
+        # 'baskets': Basket.objects.filter(user=request.user)
         # Дополнительно передали данные корзины и пользвателя корзины
     }  # Форму передали в контекст
 
@@ -83,3 +97,17 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main'))
+
+def verify(request, email, activation_key):
+    print(request, email, activation_key)
+
+def send_verify_email(user):
+    verify_link = reverse('authapp:verify', args=[user.email, user.activation_key])
+    # Здесь ошибка должно быть заполение страницы добавлен код отображения и activation_key такого нет ругается
+    subject = f'Подтверждение учетной записи {user.username}'
+
+    message = f'Для подтверждения учетной записи {user.username} на портале {settings.DOMAIN_NAME} перейдите по ссылке: ' \
+              f'\n{settings.DOMAIN_NAME}{verify_link}'
+
+
+    return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)

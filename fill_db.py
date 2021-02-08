@@ -1,3 +1,5 @@
+from signal import pause
+
 from django.core.management.base import BaseCommand
 from mainapp.models import ProductCategory, Product
 from django.contrib.auth.models import User
@@ -37,6 +39,4 @@ class Command(BaseCommand):
         # Создаем суперпользователя при помощи менеджера модели
         super_user = User.objects.create_superuser(
             'django', 'django@geekshop.local', 'geekbrains')
-
-
 pause
